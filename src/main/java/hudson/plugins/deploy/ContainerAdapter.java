@@ -16,24 +16,33 @@ import java.io.IOException;
  *
  * <h2>Persistence</h2>
  * <p>
- * Instances of these objects are persisted in projects' configuration XML via XStream.
+ * Instances of these objects are persisted in projects' configuration XML via
+ * XStream.
  * 
  *
  * @author Kohsuke Kawaguchi
  */
-public abstract class ContainerAdapter implements Describable<ContainerAdapter>, ExtensionPoint {
-    /**
-     * Perform redeployment.
-     *
-     * If failed, return false.
-     */
-    public abstract boolean redeploy(FilePath war, String aContextPath, AbstractBuild<?,?> build, Launcher launcher, final BuildListener listener) throws IOException, InterruptedException;
+public abstract class ContainerAdapter implements
+		Describable<ContainerAdapter>, ExtensionPoint {
+	/**
+	 * Perform redeployment.
+	 *
+	 * If failed, return false.
+	 */
+	public abstract boolean redeploy(FilePath war, String aContextPath,
+			AbstractBuild<?, ?> build, Launcher launcher,
+			final BuildListener listener) throws IOException,
+			InterruptedException;
 
-    public ContainerAdapterDescriptor getDescriptor() {
-        return (ContainerAdapterDescriptor)Hudson.getInstance().getDescriptor(getClass());
-    }
+	public ContainerAdapterDescriptor getDescriptor() {
+		return (ContainerAdapterDescriptor) Hudson.getInstance().getDescriptor(
+				getClass());
+	}
 
-    public static DescriptorExtensionList<ContainerAdapter,ContainerAdapterDescriptor> all() {
-        return Hudson.getInstance().<ContainerAdapter,ContainerAdapterDescriptor>getDescriptorList(ContainerAdapter.class);
-    }
+	public static DescriptorExtensionList<ContainerAdapter, ContainerAdapterDescriptor> all() {
+		return Hudson
+				.getInstance()
+				.<ContainerAdapter, ContainerAdapterDescriptor> getDescriptorList(
+						ContainerAdapter.class);
+	}
 }

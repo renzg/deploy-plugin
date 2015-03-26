@@ -1,4 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
@@ -8,7 +9,7 @@
 	</parent>
 
 	<artifactId>deploy</artifactId>
-	<version>1.11-SNAPSHOT</version>
+	<version>1.12</version>
 	<packaging>hpi</packaging>
 	<name>Deploy to container Plugin</name>
 	<url>http://wiki.jenkins-ci.org/display/JENKINS/Deploy+Plugin</url>
@@ -19,6 +20,31 @@
 		<url>https://github.com/jenkinsci/deploy-plugin</url>
 	</scm>
 
+	<repositories>
+		<repository>
+			<id>repo.jenkins-ci.org</id>
+			<url>http://repo.jenkins-ci.org/public/</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+	</repositories>
+
+	<pluginRepositories>
+		<pluginRepository>
+			<id>repo.jenkins-ci.org</id>
+			<url>http://repo.jenkins-ci.org/public/</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</pluginRepository>
+	</pluginRepositories>
 	<developers>
 		<developer>
 			<id>kohsuke</id>
@@ -32,7 +58,7 @@
 			<id>devkiela</id>
 			<name>Daniel Barth</name>
 		</developer>
-                <developer>
+		<developer>
 			<id>leandro-freitas-softdevelop</id>
 			<name>Leandro Kersting de Freitas</name>
 		</developer>
@@ -40,7 +66,7 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<cargo.version>1.4.3</cargo.version>
+		<cargo.version>1.4.14-SNAPSHOT</cargo.version>
 	</properties>
 
 	<dependencies>
@@ -94,11 +120,11 @@
 
 	</dependencies>
 
-    <licenses>
-      <license>
-        <name>MIT license</name>
-        <comments>All source code is under the MIT license.</comments>
-      </license>
-    </licenses>
+	<licenses>
+		<license>
+			<name>MIT license</name>
+			<comments>All source code is under the MIT license.</comments>
+		</license>
+	</licenses>
 </project>  
 
