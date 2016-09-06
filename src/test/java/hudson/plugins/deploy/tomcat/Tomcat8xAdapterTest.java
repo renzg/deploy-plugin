@@ -15,7 +15,7 @@ import org.codehaus.cargo.container.ContainerType;
 import org.codehaus.cargo.container.configuration.Configuration;
 import org.codehaus.cargo.container.configuration.ConfigurationType;
 import org.codehaus.cargo.container.property.RemotePropertySet;
-import org.codehaus.cargo.container.tomcat.Tomcat7xRemoteContainer;
+import org.codehaus.cargo.container.tomcat.Tomcat8xRemoteContainer;
 import org.codehaus.cargo.generic.configuration.DefaultConfigurationFactory;
 import org.junit.Assert;
 import org.junit.Before;
@@ -24,11 +24,11 @@ import org.junit.Test;
 import org.jvnet.hudson.test.JenkinsRule;
 
 /**
- * @author soudmaijer
+ * @author frekele
  */
-public class Tomcat7xAdapterTest {
+public class Tomcat8xAdapterTest {
 
-    private Tomcat7xAdapter adapter;
+    private Tomcat8xAdapter adapter;
     private static final String url = "http://localhost:8080";
     private static final String configuredUrl = "http://localhost:8080/manager/text";
     private static final String urlVariable = "URL";
@@ -42,12 +42,12 @@ public class Tomcat7xAdapterTest {
 
     @Before
     public void setup() {
-        adapter = new  Tomcat7xAdapter(url, password, username);
+        adapter = new  Tomcat8xAdapter(url, password, username);
     }
 
     @Test
     public void testContainerId() {
-        Assert.assertEquals(adapter.getContainerId(), new Tomcat7xRemoteContainer(null).getId());            
+        Assert.assertEquals(adapter.getContainerId(), new Tomcat8xRemoteContainer(null).getId());            
     }
 
     @Test
@@ -69,7 +69,7 @@ public class Tomcat7xAdapterTest {
         FreeStyleBuild build = project.scheduleBuild2(0).get();
         BuildListener listener = new StreamBuildListener(new ByteArrayOutputStream());
 
-        adapter = new  Tomcat7xAdapter(getVariable(urlVariable), password, getVariable(usernameVariable));
+        adapter = new  Tomcat8xAdapter(getVariable(urlVariable), password, getVariable(usernameVariable));
         Configuration config = new DefaultConfigurationFactory().createConfiguration(adapter.getContainerId(), ContainerType.REMOTE, ConfigurationType.RUNTIME);
         adapter.configure(config, build.getEnvironment(listener), build.getBuildVariableResolver());
         
