@@ -4,17 +4,11 @@ import hudson.EnvVars;
 import hudson.FilePath;
 import hudson.FilePath.FileCallable;
 import hudson.Launcher;
-<<<<<<< HEAD
-import hudson.model.BuildListener;
-import hudson.model.AbstractBuild;
-import hudson.remoting.VirtualChannel;
-=======
 import hudson.Util;
 import hudson.model.BuildListener;
 import hudson.model.AbstractBuild;
 import hudson.remoting.VirtualChannel;
 import hudson.util.VariableResolver;
->>>>>>> jenkinsci/master
 
 import java.io.File;
 import java.io.IOException;
@@ -28,8 +22,6 @@ import org.codehaus.cargo.container.configuration.Configuration;
 import org.codehaus.cargo.container.configuration.ConfigurationType;
 import org.codehaus.cargo.container.deployable.EAR;
 import org.codehaus.cargo.container.deployable.WAR;
-import org.codehaus.cargo.container.deployer.DeployableMonitor;
-import org.codehaus.cargo.container.deployer.DeployableMonitorListener;
 import org.codehaus.cargo.container.deployer.Deployer;
 import org.codehaus.cargo.generic.ContainerFactory;
 import org.codehaus.cargo.generic.DefaultContainerFactory;
@@ -37,10 +29,6 @@ import org.codehaus.cargo.generic.configuration.ConfigurationFactory;
 import org.codehaus.cargo.generic.configuration.DefaultConfigurationFactory;
 import org.codehaus.cargo.generic.deployer.DefaultDeployerFactory;
 import org.codehaus.cargo.generic.deployer.DeployerFactory;
-<<<<<<< HEAD
-import org.codehaus.cargo.util.log.Logger;
-=======
->>>>>>> jenkinsci/master
 
 /**
  * Provides container-specific glue code.
@@ -51,118 +39,6 @@ import org.codehaus.cargo.util.log.Logger;
  *
  * @author Kohsuke Kawaguchi
  */
-<<<<<<< HEAD
-public abstract class CargoContainerAdapter extends ContainerAdapter implements
-		Serializable {
-
-	/**
-	 * Returns the container ID used by Cargo.
-	 *
-	 * @return
-	 */
-	protected abstract String getContainerId();
-
-	/**
-	 * Fills in the {@link Configuration} object.
-	 *
-	 * @param config
-	 */
-	protected abstract void configure(Configuration config);
-
-	protected Container getContainer(ConfigurationFactory configFactory,
-			ContainerFactory containerFactory, String id) {
-		Configuration config = configFactory.createConfiguration(id,
-				ContainerType.REMOTE, ConfigurationType.RUNTIME);
-
-		configure(config);
-
-		System.out.println(String.format("发布配置：%s",
-				String.valueOf(config.getProperties())));
-		Container container = containerFactory.createContainer(id,
-				ContainerType.REMOTE, config);
-		System.out.println("创建发布容器:" + container.getName() + ","
-				+ container.getType());
-		return container;
-	}
-
-	protected void deploy(DeployerFactory deployerFactory,
-			final BuildListener listener, Container container, File f,
-			String contextPath) {
-
-		Deployer deployer = deployerFactory.createDeployer(container);
-
-		listener.getLogger().println(
-				"Deploying " + f + " to container " + container.getName());
-		System.out.println("Deploying " + f + "to container "
-				+ container.getName());
-
-		deployer.setLogger(new LoggerImpl(listener.getLogger()));
-
-		String extension = FilenameUtils.getExtension(f.getAbsolutePath());
-		if ("WAR".equalsIgnoreCase(extension)) {
-			WAR war = createWAR(f);
-			if (!StringUtils.isEmpty(contextPath)) {
-				war.setContext(contextPath);
-			}
-			deployer.redeploy(war);
-		} else if ("EAR".equalsIgnoreCase(extension)) {
-			EAR ear = createEAR(f);
-			deployer.redeploy(ear);
-		} else {
-			throw new RuntimeException("Extension File Error.");
-		}
-	}
-
-	/**
-	 * Creates a Deployable object WAR from the given file object.
-	 *
-	 * @param deployableFile
-	 *            The deployable file to create the Deployable from.
-	 * @return A Deployable object.
-	 */
-	protected WAR createWAR(File deployableFile) {
-		return new WAR(deployableFile.getAbsolutePath());
-	}
-
-	/**
-	 * Creates a Deployable object EAR from the given file object.
-	 *
-	 * @param deployableFile
-	 *            The deployable file to create the Deployable from.
-	 * @return A Deployable object.
-	 */
-	protected EAR createEAR(File deployableFile) {
-		return new EAR(deployableFile.getAbsolutePath());
-	}
-
-	public boolean redeploy(FilePath war, final String contextPath,
-			AbstractBuild<?, ?> build, Launcher launcher,
-			final BuildListener listener) throws IOException,
-			InterruptedException {
-		return war.act(new FileCallable<Boolean>() {
-			public Boolean invoke(File f, VirtualChannel channel)
-					throws IOException {
-				if (!f.exists()) {
-					listener.error(Messages.DeployPublisher_NoSuchFile(f));
-					return true;
-				}
-				ClassLoader cl = getClass().getClassLoader();
-				final ConfigurationFactory configFactory = new DefaultConfigurationFactory(
-						cl);
-				final ContainerFactory containerFactory = new DefaultContainerFactory(
-						cl);
-				final DeployerFactory deployerFactory = new DefaultDeployerFactory(
-						cl);
-
-				Container container = getContainer(configFactory,
-						containerFactory, getContainerId());
-
-				deploy(deployerFactory, listener, container, f, contextPath);
-				return true;
-			}
-		});
-	}
-=======
 public abstract class CargoContainerAdapter extends ContainerAdapter implements Serializable {
 
     /**
@@ -258,5 +134,4 @@ public abstract class CargoContainerAdapter extends ContainerAdapter implements 
             }
         });
     }
->>>>>>> jenkinsci/master
 }

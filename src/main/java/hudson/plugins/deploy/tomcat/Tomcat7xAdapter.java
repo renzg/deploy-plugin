@@ -19,49 +19,6 @@ import org.kohsuke.stapler.DataBoundConstructor;
  */
 public class Tomcat7xAdapter extends TomcatAdapter {
 
-<<<<<<< HEAD
-	/**
-	 * Tomcat 7 support
-	 * 
-	 * @param url
-	 *            Tomcat server location (for example: http://localhost:8080)
-	 * @param password
-	 *            tomcat manager password
-	 * @param userName
-	 *            tomcat manager username
-	 */
-	@DataBoundConstructor
-	public Tomcat7xAdapter(String url, String password, String userName) {
-		super(url, password, userName);
-	}
-
-	public void configure(Configuration config) {
-		super.configure(config);
-		try {
-			URL _url = new URL(super.buildUrl("manager/text"));
-			config.setProperty(RemotePropertySet.URI, _url.toExternalForm());
-
-		} catch (MalformedURLException e) {
-			throw new AssertionError(e);
-		}
-	}
-
-	/**
-	 * Tomcat Cargo containerId
-	 * 
-	 * @return tomcat7x
-	 */
-	public String getContainerId() {
-		return "tomcat7x";
-	}
-
-	@Extension
-	public static final class DescriptorImpl extends ContainerAdapterDescriptor {
-		public String getDisplayName() {
-			return "Tomcat 7.x";
-		}
-	}
-=======
     /**
      * Tomcat 7 support
      *
@@ -98,5 +55,4 @@ public class Tomcat7xAdapter extends TomcatAdapter {
             return "Tomcat 7.x";
         }
     }
->>>>>>> jenkinsci/master
 }

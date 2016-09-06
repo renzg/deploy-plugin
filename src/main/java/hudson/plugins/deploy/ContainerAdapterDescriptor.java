@@ -15,27 +15,14 @@ import org.kohsuke.stapler.QueryParameter;
  * 
  * @author Kohsuke Kawaguchi
  */
-public abstract class ContainerAdapterDescriptor extends
-		Descriptor<ContainerAdapter> {
-	protected ContainerAdapterDescriptor(Class<? extends ContainerAdapter> clazz) {
-		super(clazz);
-	}
+public abstract class ContainerAdapterDescriptor extends Descriptor<ContainerAdapter> {
+    protected ContainerAdapterDescriptor(Class<? extends ContainerAdapter> clazz) {
+        super(clazz);
+    }
 
-	protected ContainerAdapterDescriptor() {
-	}
+    protected ContainerAdapterDescriptor() {
+    }
 
-<<<<<<< HEAD
-	public FormValidation doCheckUrl(@QueryParameter String value)
-			throws IOException, ServletException {
-		if (value != null && value.length() > 0) {
-			try {
-				new URL(value);
-			} catch (Exception e) {
-				return FormValidation.error(Messages
-						.DeployPublisher_BadFormedUrl());
-			}
-		}
-=======
     public FormValidation doCheckUrl(@QueryParameter String value) throws IOException, ServletException {
         if (value != null && value.length() > 0) {
             try {
@@ -44,8 +31,7 @@ public abstract class ContainerAdapterDescriptor extends
                 return FormValidation.warning(Messages.DeployPublisher_BadFormedUrl());
             }
         }
->>>>>>> jenkinsci/master
 
-		return FormValidation.ok();
-	}
+        return FormValidation.ok();
+    }
 }
