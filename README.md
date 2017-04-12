@@ -1,6 +1,13 @@
 Jenkins Deploy Plugin
 =========================
 
+*1、基于原作者基础上升级了cargo版本，增加了更多的容器选择和支持；
+*2、在部署的是时候输出部分日志到Console，以便于了解部署进度；
+
+
+*3、拟增加针对同一台主机到多个节点（多个tomcat监听端口）的统一配置和部署；
+
+
 This plugin permits Jenkins to Deploy into containers and application servers.
 
 See [Deploy Plugin](https://wiki.jenkins-ci.org/display/JENKINS/Deploy+Plugin) for more information.
